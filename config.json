@@ -2,13 +2,13 @@
   "upstream_url": "https://raw.githubusercontent.com/BerriAI/litellm/main/model_prices_and_context_window.json",
   "output_file": "model_prices_and_context_window.json",
   "hash_file": "model_prices_and_context_window.sha256",
-  "sync_mode": "additive",
-  "update_existing": false,
+  "sync_mode": "full",
+  "update_existing": true,
   "prefix_filters": [
     "claude-",
     "gpt-",
     "gemini-",
-    "o1-",
+    "o1",
     "o3-",
     "o3",
     "o4-",
@@ -17,6 +17,22 @@
   "exclude_patterns": [
     "sample_spec"
   ],
+  "official_openai": {
+    "enabled": true,
+    "pricing_url": "https://developers.openai.com/api/docs/pricing.md",
+    "long_context_input_token_threshold": 272000,
+    "required_models": [
+      "gpt-5.6-sol",
+      "gpt-5.6-terra",
+      "gpt-5.6-luna"
+    ],
+    "prefix_filters": [
+      "gpt-",
+      "o1",
+      "o3",
+      "o4"
+    ]
+  },
   "aliases": {
     "claude-opus-4-6-thinking": {
       "source": "claude-opus-4-6",
@@ -135,176 +151,6 @@
       "supports_vision": true,
       "supports_xhigh_reasoning_effort": true,
       "tool_use_system_prompt_tokens": 346
-    },
-    "gpt-5.4-mini": {
-      "cache_read_input_token_cost": 7.5e-08,
-      "input_cost_per_token": 7.5e-07,
-      "litellm_provider": "openai",
-      "max_input_tokens": 400000,
-      "max_output_tokens": 128000,
-      "max_tokens": 128000,
-      "mode": "chat",
-      "output_cost_per_token": 4.5e-06,
-      "supported_endpoints": [
-        "/v1/chat/completions",
-        "/v1/batch",
-        "/v1/responses"
-      ],
-      "supported_modalities": [
-        "text",
-        "image"
-      ],
-      "supported_output_modalities": [
-        "text"
-      ],
-      "supports_function_calling": true,
-      "supports_native_streaming": true,
-      "supports_parallel_function_calling": true,
-      "supports_pdf_input": true,
-      "supports_prompt_caching": true,
-      "supports_reasoning": true,
-      "supports_response_schema": true,
-      "supports_service_tier": true,
-      "supports_system_messages": true,
-      "supports_tool_choice": true,
-      "supports_vision": true
-    },
-    "gpt-5.4-nano": {
-      "cache_read_input_token_cost": 2e-08,
-      "input_cost_per_token": 2e-07,
-      "litellm_provider": "openai",
-      "max_input_tokens": 400000,
-      "max_output_tokens": 128000,
-      "max_tokens": 128000,
-      "mode": "chat",
-      "output_cost_per_token": 1.25e-06,
-      "supported_endpoints": [
-        "/v1/chat/completions",
-        "/v1/batch",
-        "/v1/responses"
-      ],
-      "supported_modalities": [
-        "text",
-        "image"
-      ],
-      "supported_output_modalities": [
-        "text"
-      ],
-      "supports_function_calling": true,
-      "supports_native_streaming": true,
-      "supports_parallel_function_calling": true,
-      "supports_pdf_input": true,
-      "supports_prompt_caching": true,
-      "supports_reasoning": true,
-      "supports_response_schema": true,
-      "supports_system_messages": true,
-      "supports_tool_choice": true,
-      "supports_vision": true
-    },
-    "gpt-5.6-sol": {
-      "cache_creation_input_token_cost": 6.25e-06,
-      "cache_creation_input_token_cost_above_272k_tokens": 1.25e-05,
-      "cache_read_input_token_cost": 5e-07,
-      "input_cost_per_token": 5e-06,
-      "litellm_provider": "openai",
-      "max_input_tokens": 400000,
-      "max_output_tokens": 128000,
-      "max_tokens": 128000,
-      "mode": "chat",
-      "output_cost_per_token": 3e-05,
-      "supported_endpoints": [
-        "/v1/chat/completions",
-        "/v1/batch",
-        "/v1/responses"
-      ],
-      "supported_modalities": [
-        "text",
-        "image"
-      ],
-      "supported_output_modalities": [
-        "text"
-      ],
-      "supports_function_calling": true,
-      "supports_native_streaming": true,
-      "supports_parallel_function_calling": true,
-      "supports_pdf_input": true,
-      "supports_prompt_caching": true,
-      "supports_reasoning": true,
-      "supports_response_schema": true,
-      "supports_service_tier": true,
-      "supports_system_messages": true,
-      "supports_tool_choice": true,
-      "supports_vision": true
-    },
-    "gpt-5.6-terra": {
-      "cache_creation_input_token_cost": 3.125e-06,
-      "cache_creation_input_token_cost_above_272k_tokens": 6.25e-06,
-      "cache_read_input_token_cost": 2.5e-07,
-      "input_cost_per_token": 2.5e-06,
-      "litellm_provider": "openai",
-      "max_input_tokens": 400000,
-      "max_output_tokens": 128000,
-      "max_tokens": 128000,
-      "mode": "chat",
-      "output_cost_per_token": 1.5e-05,
-      "supported_endpoints": [
-        "/v1/chat/completions",
-        "/v1/batch",
-        "/v1/responses"
-      ],
-      "supported_modalities": [
-        "text",
-        "image"
-      ],
-      "supported_output_modalities": [
-        "text"
-      ],
-      "supports_function_calling": true,
-      "supports_native_streaming": true,
-      "supports_parallel_function_calling": true,
-      "supports_pdf_input": true,
-      "supports_prompt_caching": true,
-      "supports_reasoning": true,
-      "supports_response_schema": true,
-      "supports_service_tier": true,
-      "supports_system_messages": true,
-      "supports_tool_choice": true,
-      "supports_vision": true
-    },
-    "gpt-5.6-luna": {
-      "cache_creation_input_token_cost": 1.25e-06,
-      "cache_creation_input_token_cost_above_272k_tokens": 2.5e-06,
-      "cache_read_input_token_cost": 1e-07,
-      "input_cost_per_token": 1e-06,
-      "litellm_provider": "openai",
-      "max_input_tokens": 400000,
-      "max_output_tokens": 128000,
-      "max_tokens": 128000,
-      "mode": "chat",
-      "output_cost_per_token": 6e-06,
-      "supported_endpoints": [
-        "/v1/chat/completions",
-        "/v1/batch",
-        "/v1/responses"
-      ],
-      "supported_modalities": [
-        "text",
-        "image"
-      ],
-      "supported_output_modalities": [
-        "text"
-      ],
-      "supports_function_calling": true,
-      "supports_native_streaming": true,
-      "supports_parallel_function_calling": true,
-      "supports_pdf_input": true,
-      "supports_prompt_caching": true,
-      "supports_reasoning": true,
-      "supports_response_schema": true,
-      "supports_service_tier": true,
-      "supports_system_messages": true,
-      "supports_tool_choice": true,
-      "supports_vision": true
     },
     "kimi-k2.6": {
       "input_cost_per_token": 9.54e-07,

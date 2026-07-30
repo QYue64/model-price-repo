@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""Sync model pricing from upstream litellm, applying prefix filters,
-aliases, and custom model definitions.
+"""Sync model pricing from LiteLLM and official OpenAI pricing, applying
+prefix filters, aliases, and custom model definitions.
 
 Usage:
     python3 scripts/sync_prices.py --config config.json --repo-root .
 """
+
+from __future__ import annotations
 
 import argparse
 import copy
@@ -13,6 +15,7 @@ import hashlib
 import json
 import logging
 import os
+import re
 import sys
 import urllib.error
 import urllib.request
@@ -104,6 +107,196 @@ def fetch_upstream(url: str) -> dict:
 
     log.info("Upstream contains %d model entries.", len(data))
     return data
+
+
+def fetch_text(url: str, label: str) -> str:
+    """从可信来源下载 UTF-8 文本文件。"""
+    log.info("Fetching %s: %s", label, url)
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "model-price-repo/1.0"})
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            return resp.read().decode("utf-8")
+    except (urllib.error.URLError, OSError, UnicodeDecodeError) as exc:
+        log.error("Failed to fetch %s: %s", label, exc)
+        sys.exit(1)
+
+
+# 这些是 Sub2Api 消费的价格字段。应用官方数据前先删除它们，避免旧的
+# 自定义价格在官方价格变更后继续残留。
+OFFICIAL_PRICE_FIELDS = {
+    "input_cost_per_token",
+    "output_cost_per_token",
+    "cache_creation_input_token_cost",
+    "cache_creation_input_token_cost_above_1hr",
+    "cache_creation_input_token_cost_above_272k_tokens",
+    "cache_read_input_token_cost",
+    "cache_read_input_token_cost_above_272k_tokens",
+    "long_context_input_token_threshold",
+    "long_context_input_cost_multiplier",
+    "long_context_output_cost_multiplier",
+    "input_cost_per_token_above_272k_tokens",
+    "output_cost_per_token_above_272k_tokens",
+    "input_cost_per_token_priority",
+    "output_cost_per_token_priority",
+    "cache_creation_input_token_cost_priority",
+    "cache_read_input_token_cost_priority",
+    "input_cost_per_token_batches",
+    "output_cost_per_token_batches",
+    "cache_creation_input_token_cost_batches",
+    "cache_read_input_token_cost_batches",
+    "input_cost_per_token_flex",
+    "output_cost_per_token_flex",
+    "cache_creation_input_token_cost_flex",
+    "cache_read_input_token_cost_flex",
+}
+
+
+def parse_price_per_million(value: str) -> float | None:
+    """将 '$0.20' 这类每百万 Token 价格转换为单 Token 美元价格。"""
+    normalized = value.strip().replace(",", "")
+    if normalized in {"", "-", "—", "N/A", "n/a"}:
+        return None
+    normalized = normalized.removeprefix("$").strip()
+    try:
+        return round(float(normalized) / 1_000_000, 15)
+    except ValueError:
+        return None
+
+
+def parse_markdown_row(line: str) -> list[str] | None:
+    """解析一行由竖线分隔的 Markdown 表格。"""
+    stripped = line.strip()
+    if not stripped.startswith("|") or "|" not in stripped[1:]:
+        return None
+    cells = [cell.strip() for cell in stripped.strip("|").split("|")]
+    if not cells or all(re.fullmatch(r":?-{3,}:?", cell) for cell in cells):
+        return None
+    return cells
+
+
+def normalize_official_model_name(name: str) -> str:
+    """移除官方模型名称末尾的上下文说明。"""
+    name = re.sub(r"\s+\([^)]*\)\s*$", "", name.strip())
+    return name.strip().lower()
+
+
+def apply_official_tier(entry: dict, row: dict[str, str], tier: str, threshold: int) -> None:
+    """将官方价格表的一行转换为 LiteLLM 兼容字段。"""
+    field_prefix = {
+        "standard": "",
+        "batch": "_batches",
+        "flex": "_flex",
+        "fast": "_priority",
+    }[tier]
+
+    mapping = {
+        "Short context input": f"input_cost_per_token{field_prefix}",
+        "Short context cached input": f"cache_read_input_token_cost{field_prefix}",
+        "Short context cache writes": f"cache_creation_input_token_cost{field_prefix}",
+        "Short context output": f"output_cost_per_token{field_prefix}",
+    }
+    for column, output_key in mapping.items():
+        value = parse_price_per_million(row.get(column, ""))
+        if value is not None:
+            entry[output_key] = value
+
+    # Sub2Api 会把长上下文倍率应用到输入、缓存读取、缓存写入和输出。
+    # 官方表格直接给出长上下文价格，因此计算倍率，不输出不受支持的
+    # *_above_* 字段。
+    if tier != "standard":
+        return
+    short_input = parse_price_per_million(row.get("Short context input", ""))
+    short_output = parse_price_per_million(row.get("Short context output", ""))
+    long_input = parse_price_per_million(row.get("Long context input", ""))
+    long_output = parse_price_per_million(row.get("Long context output", ""))
+    if short_input and long_input:
+        entry["long_context_input_token_threshold"] = threshold
+        entry["long_context_input_cost_multiplier"] = long_input / short_input
+    if short_output and long_output:
+        entry["long_context_input_token_threshold"] = threshold
+        entry["long_context_output_cost_multiplier"] = long_output / short_output
+
+
+def parse_official_openai_pricing(markdown: str, config: dict) -> dict:
+    """解析 OpenAI 官方 Markdown 定价页并规范化其中的价格表。"""
+    official_cfg = config.get("official_openai", {})
+    prefixes = tuple(official_cfg.get("prefix_filters", ["gpt-", "o1", "o3", "o4"]))
+    threshold = int(official_cfg.get("long_context_input_token_threshold", 272_000))
+
+    current_tier: str | None = None
+    headers: list[str] | None = None
+    models: dict[str, dict] = {}
+    heading_pattern = re.compile(r"^###\s+(Standard|Batch|Flex|Fast) pricing data\s*$", re.IGNORECASE)
+
+    for line in markdown.splitlines():
+        heading = heading_pattern.match(line.strip())
+        if heading:
+            current_tier = heading.group(1).lower()
+            headers = None
+            continue
+
+        row = parse_markdown_row(line)
+        if row is None:
+            if not line.strip():
+                headers = None
+            continue
+
+        if row[0].lower() == "model" and "Short context input" in row:
+            headers = row
+            continue
+        if current_tier is None or headers is None or len(row) != len(headers):
+            continue
+
+        row_data = dict(zip(headers, row))
+        model_name = normalize_official_model_name(row_data.get("Model", ""))
+        if not model_name or not model_name.startswith(prefixes):
+            continue
+
+        entry = models.setdefault(
+            model_name,
+            {"litellm_provider": "openai", "mode": "chat"},
+        )
+        apply_official_tier(entry, row_data, current_tier, threshold)
+
+    if not models:
+        log.error("Official OpenAI pricing page contained no matching model rows")
+        sys.exit(1)
+
+    required_models = [
+        normalize_official_model_name(name)
+        for name in official_cfg.get("required_models", [])
+    ]
+    missing_models = [name for name in required_models if name not in models]
+    if missing_models:
+        log.error("Official OpenAI pricing is missing required models: %s", ", ".join(missing_models))
+        sys.exit(1)
+
+    log.info("Official OpenAI pricing contains %d matching models.", len(models))
+    return models
+
+
+def fetch_official_openai_pricing(url: str, config: dict) -> dict:
+    """下载并解析 OpenAI 官方 Markdown 定价页。"""
+    return parse_official_openai_pricing(fetch_text(url, "official OpenAI pricing"), config)
+
+
+def merge_official_pricing(data: dict, official: dict) -> tuple[dict, int]:
+    """覆盖官方价格，同时保留非价格元数据。"""
+    updated = 0
+    for model_name, pricing in official.items():
+        target = data.setdefault(model_name, {})
+        if not isinstance(target, dict):
+            target = {}
+            data[model_name] = target
+        before = {key: target.get(key) for key in OFFICIAL_PRICE_FIELDS}
+        for key in OFFICIAL_PRICE_FIELDS:
+            target.pop(key, None)
+        target.update(pricing)
+        after = {key: target.get(key) for key in OFFICIAL_PRICE_FIELDS}
+        if before != after:
+            updated += 1
+    log.info("Official OpenAI pricing applied to %d models.", updated)
+    return data, updated
 
 
 # ---------------------------------------------------------------------------
@@ -323,23 +516,34 @@ def main() -> None:
         stats["unchanged"],
     )
 
-    # 6. Aliases
-    aliases = config.get("aliases", {})
-    if aliases:
-        merged = apply_aliases(merged, aliases)
-
-    # 7. Auto-fill cache 1hr pricing
-    cache_1hr_count = fill_cache_1hr_pricing(merged, config)
-
-    # 8. Custom models
+    # 6. 自定义模型提供元数据和非官方厂商的价格覆盖。
     custom = config.get("custom_models", {})
     if custom:
         merged = apply_custom_models(merged, custom)
 
-    # 9. Write output
+    # 7. 最后应用 OpenAI 官方价格，避免旧的自定义价格覆盖官方来源。
+    official_cfg = config.get("official_openai", {})
+    official_updated = 0
+    if official_cfg.get("enabled", True):
+        official_url = official_cfg.get("pricing_url")
+        if not official_url:
+            log.error("official_openai.enabled is true but pricing_url is empty")
+            sys.exit(1)
+        official = fetch_official_openai_pricing(official_url, config)
+        merged, official_updated = merge_official_pricing(merged, official)
+
+    # 8. 官方价格应用后再复制别名，使官方模型别名继承最新价格。
+    aliases = config.get("aliases", {})
+    if aliases:
+        merged = apply_aliases(merged, aliases)
+
+    # 9. Auto-fill cache 1hr pricing
+    cache_1hr_count = fill_cache_1hr_pricing(merged, config)
+
+    # 10. Write output
     changed, new_hash = write_output(merged, output_path, hash_path, old_hash)
 
-    # 10. Report
+    # 11. Report
     log.info("--- Sync Report ---")
     log.info("Total models in output: %d", len(merged))
     log.info("Added:     %d", stats["added"])
@@ -348,6 +552,7 @@ def main() -> None:
     log.info("Aliases:   %d", len(aliases))
     log.info("Cache 1hr auto-filled: %d", cache_1hr_count)
     log.info("Custom:    %d", len(custom))
+    log.info("Official OpenAI updated: %d", official_updated)
 
     # Machine-readable output for CI
     print(f"CHANGED={str(changed).lower()}")
