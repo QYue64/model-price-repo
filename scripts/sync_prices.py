@@ -151,11 +151,14 @@ OFFICIAL_PRICE_FIELDS = {
 }
 
 # 价格倍率只作用于直接价格字段，不改变长上下文阈值或倍率元数据。
-PRICE_MULTIPLIER_FIELDS = OFFICIAL_PRICE_FIELDS - {
-    "long_context_input_token_threshold",
-    "long_context_input_cost_multiplier",
-    "long_context_output_cost_multiplier",
-}
+# 使用前缀可以覆盖上游后续新增的长上下文/批次/模态价格字段。
+PRICE_MULTIPLIER_FIELD_PREFIXES = (
+    "input_cost_",
+    "output_cost_",
+    "cache_creation_input_token_cost",
+    "cache_read_input_token_cost",
+    "search_context_cost_per_query",
+)
 
 
 def parse_price_per_million(value: str) -> float | None:
@@ -321,8 +324,9 @@ def apply_price_multipliers(data: dict, multipliers: dict) -> int:
 
         multiplier_decimal = Decimal(str(multiplier))
         changed = False
-        for field in PRICE_MULTIPLIER_FIELDS:
-            value = entry.get(field)
+        for field, value in entry.items():
+            if not any(field.startswith(prefix) for prefix in PRICE_MULTIPLIER_FIELD_PREFIXES):
+                continue
             if not isinstance(value, (int, float)) or isinstance(value, bool):
                 continue
             multiplied = float(Decimal(str(value)) * multiplier_decimal)

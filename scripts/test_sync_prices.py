@@ -73,7 +73,9 @@ class SyncPricesTest(unittest.TestCase):
         data = {
             "gpt-5.6-luna": {
                 "input_cost_per_token": 2e-7,
+                "input_cost_per_token_above_272k_tokens_flex": 2e-7,
                 "output_cost_per_token": 1.2e-6,
+                "output_cost_per_token_above_272k_tokens_flex": 9e-7,
                 "input_cost_per_token_priority": 4e-7,
                 "long_context_input_cost_multiplier": 2.0,
                 "long_context_output_cost_multiplier": 1.5,
@@ -85,7 +87,9 @@ class SyncPricesTest(unittest.TestCase):
 
         self.assertEqual(updated, 1)
         self.assertEqual(data["gpt-5.6-luna"]["input_cost_per_token"], 4e-7)
+        self.assertEqual(data["gpt-5.6-luna"]["input_cost_per_token_above_272k_tokens_flex"], 4e-7)
         self.assertEqual(data["gpt-5.6-luna"]["output_cost_per_token"], 2.4e-6)
+        self.assertEqual(data["gpt-5.6-luna"]["output_cost_per_token_above_272k_tokens_flex"], 1.8e-6)
         self.assertEqual(data["gpt-5.6-luna"]["input_cost_per_token_priority"], 8e-7)
         self.assertEqual(data["gpt-5.6-luna"]["long_context_input_cost_multiplier"], 2.0)
         self.assertEqual(data["gpt-5.6-luna"]["long_context_output_cost_multiplier"], 1.5)
