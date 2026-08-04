@@ -33,6 +33,9 @@
       "o4"
     ]
   },
+  "price_multipliers": {
+    "gpt-5.6-luna": 2.0
+  },
   "aliases": {
     "claude-opus-4-6-thinking": {
       "source": "claude-opus-4-6",

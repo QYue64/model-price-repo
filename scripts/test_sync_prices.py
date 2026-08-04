@@ -69,6 +69,28 @@ class SyncPricesTest(unittest.TestCase):
         self.assertEqual(merged["gpt-5.6-luna"]["input_cost_per_token"], 2e-7)
         self.assertNotIn("input_cost_per_token_above_272k_tokens", merged["gpt-5.6-luna"])
 
+    def test_price_multiplier_doubles_direct_prices_only(self) -> None:
+        data = {
+            "gpt-5.6-luna": {
+                "input_cost_per_token": 2e-7,
+                "output_cost_per_token": 1.2e-6,
+                "input_cost_per_token_priority": 4e-7,
+                "long_context_input_cost_multiplier": 2.0,
+                "long_context_output_cost_multiplier": 1.5,
+                "long_context_input_token_threshold": 272000,
+            }
+        }
+
+        updated = SYNC.apply_price_multipliers(data, {"gpt-5.6-luna": 2.0})
+
+        self.assertEqual(updated, 1)
+        self.assertEqual(data["gpt-5.6-luna"]["input_cost_per_token"], 4e-7)
+        self.assertEqual(data["gpt-5.6-luna"]["output_cost_per_token"], 2.4e-6)
+        self.assertEqual(data["gpt-5.6-luna"]["input_cost_per_token_priority"], 8e-7)
+        self.assertEqual(data["gpt-5.6-luna"]["long_context_input_cost_multiplier"], 2.0)
+        self.assertEqual(data["gpt-5.6-luna"]["long_context_output_cost_multiplier"], 1.5)
+        self.assertEqual(data["gpt-5.6-luna"]["long_context_input_token_threshold"], 272000)
+
 
 if __name__ == "__main__":
     unittest.main()

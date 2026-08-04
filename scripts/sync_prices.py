@@ -150,6 +150,13 @@ OFFICIAL_PRICE_FIELDS = {
     "cache_read_input_token_cost_flex",
 }
 
+# 价格倍率只作用于直接价格字段，不改变长上下文阈值或倍率元数据。
+PRICE_MULTIPLIER_FIELDS = OFFICIAL_PRICE_FIELDS - {
+    "long_context_input_token_threshold",
+    "long_context_input_cost_multiplier",
+    "long_context_output_cost_multiplier",
+}
+
 
 def parse_price_per_million(value: str) -> float | None:
     """将 '$0.20' 这类每百万 Token 价格转换为单 Token 美元价格。"""
@@ -297,6 +304,37 @@ def merge_official_pricing(data: dict, official: dict) -> tuple[dict, int]:
             updated += 1
     log.info("Official OpenAI pricing applied to %d models.", updated)
     return data, updated
+
+
+def apply_price_multipliers(data: dict, multipliers: dict) -> int:
+    """对指定模型的直接价格字段应用倍率。"""
+    updated = 0
+    for model_name, multiplier in multipliers.items():
+        if not isinstance(multiplier, (int, float)) or isinstance(multiplier, bool) or multiplier <= 0:
+            log.error("Invalid price multiplier for '%s': %r", model_name, multiplier)
+            sys.exit(1)
+
+        entry = data.get(model_name)
+        if not isinstance(entry, dict):
+            log.warning("Price multiplier target '%s' was not found; skipping.", model_name)
+            continue
+
+        multiplier_decimal = Decimal(str(multiplier))
+        changed = False
+        for field in PRICE_MULTIPLIER_FIELDS:
+            value = entry.get(field)
+            if not isinstance(value, (int, float)) or isinstance(value, bool):
+                continue
+            multiplied = float(Decimal(str(value)) * multiplier_decimal)
+            if multiplied != value:
+                entry[field] = multiplied
+                changed = True
+
+        if changed:
+            updated += 1
+            log.info("Applied price multiplier %s to '%s'.", multiplier, model_name)
+
+    return updated
 
 
 # ---------------------------------------------------------------------------
@@ -532,24 +570,31 @@ def main() -> None:
         official = fetch_official_openai_pricing(official_url, config)
         merged, official_updated = merge_official_pricing(merged, official)
 
-    # 8. 官方价格应用后再复制别名，使官方模型别名继承最新价格。
+    # 8. 官方价格应用后再应用自定义倍率，避免同步时被官方价格覆盖。
+    price_multiplier_count = apply_price_multipliers(
+        merged,
+        config.get("price_multipliers", {}),
+    )
+
+    # 9. 价格倍率应用后再复制别名，使别名继承调整后的价格。
     aliases = config.get("aliases", {})
     if aliases:
         merged = apply_aliases(merged, aliases)
 
-    # 9. Auto-fill cache 1hr pricing
+    # 10. Auto-fill cache 1hr pricing
     cache_1hr_count = fill_cache_1hr_pricing(merged, config)
 
-    # 10. Write output
+    # 11. Write output
     changed, new_hash = write_output(merged, output_path, hash_path, old_hash)
 
-    # 11. Report
+    # 12. Report
     log.info("--- Sync Report ---")
     log.info("Total models in output: %d", len(merged))
     log.info("Added:     %d", stats["added"])
     log.info("Updated:   %d", stats["updated"])
     log.info("Unchanged: %d", stats["unchanged"])
     log.info("Aliases:   %d", len(aliases))
+    log.info("Price multipliers applied: %d", price_multiplier_count)
     log.info("Cache 1hr auto-filled: %d", cache_1hr_count)
     log.info("Custom:    %d", len(custom))
     log.info("Official OpenAI updated: %d", official_updated)

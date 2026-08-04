@@ -29,6 +29,7 @@ All settings live in [`config.json`](config.json):
 | `exclude_patterns` | Substring patterns to exclude (applied before prefix matching) |
 | `aliases` | Map alias model keys to existing source models (deep copy pricing) |
 | `custom_models` | Manually defined pricing objects, always injected |
+| `price_multipliers` | Multiply direct price fields for selected models after official pricing is applied |
 
 ### Adding new model prefixes
 
@@ -60,6 +61,21 @@ Aliases create copies of an existing model's pricing under a new key:
 ```
 
 If the source model doesn't exist in the filtered data, the alias is skipped with a warning.
+
+### Applying a model price multiplier
+
+Use `price_multipliers` when a model needs a local billing adjustment that must
+survive future upstream synchronization. For example, the following doubles
+all direct token price fields for `gpt-5.6-luna` while leaving context-window
+multipliers and model limits unchanged:
+
+```json
+{
+  "price_multipliers": {
+    "gpt-5.6-luna": 2.0
+  }
+}
+```
 
 ## Running locally
 
