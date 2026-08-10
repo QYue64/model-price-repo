@@ -4907,6 +4907,10 @@
     "supports_tool_choice": true,
     "supports_vision": true
   },
+  "gpt-5.4-cyber": {
+    "litellm_provider": "openai",
+    "mode": "chat"
+  },
   "gpt-5.4-mini": {
     "cache_read_input_token_cost": 7.5e-08,
     "cache_read_input_token_cost_batches": 3.75e-08,
@@ -5273,6 +5277,13 @@
     "supports_web_search": true,
     "supports_xhigh_reasoning_effort": true
   },
+  "gpt-5.5-cyber": {
+    "cache_read_input_token_cost_priority": 1.25e-06,
+    "input_cost_per_token_priority": 1.25e-05,
+    "litellm_provider": "openai",
+    "mode": "chat",
+    "output_cost_per_token_priority": 7.5e-05
+  },
   "gpt-5.5-pro": {
     "input_cost_per_token": 3e-05,
     "input_cost_per_token_batches": 1.5e-05,
@@ -5419,6 +5430,14 @@
     "supports_web_search": true,
     "supports_xhigh_reasoning_effort": true
   },
+  "gpt-5.6-cyber": {
+    "cache_creation_input_token_cost_priority": 1.5625e-05,
+    "cache_read_input_token_cost_priority": 1.25e-06,
+    "input_cost_per_token_priority": 1.25e-05,
+    "litellm_provider": "openai",
+    "mode": "chat",
+    "output_cost_per_token_priority": 7.5e-05
+  },
   "gpt-5.6-luna": {
     "cache_creation_input_token_cost": 5e-07,
     "cache_creation_input_token_cost_above_272k_tokens_flex": 5e-07,
@@ -5482,17 +5501,17 @@
     "cache_creation_input_token_cost_above_272k_tokens_flex": 6.25e-06,
     "cache_creation_input_token_cost_batches": 3.125e-06,
     "cache_creation_input_token_cost_flex": 3.125e-06,
-    "cache_creation_input_token_cost_priority": 1.25e-05,
+    "cache_creation_input_token_cost_priority": 6.25e-06,
     "cache_read_input_token_cost": 5e-07,
     "cache_read_input_token_cost_above_272k_tokens_flex": 5e-07,
     "cache_read_input_token_cost_batches": 2.5e-07,
     "cache_read_input_token_cost_flex": 2.5e-07,
-    "cache_read_input_token_cost_priority": 1e-06,
+    "cache_read_input_token_cost_priority": 5e-07,
     "input_cost_per_token": 5e-06,
     "input_cost_per_token_above_272k_tokens_flex": 5e-06,
     "input_cost_per_token_batches": 2.5e-06,
     "input_cost_per_token_flex": 2.5e-06,
-    "input_cost_per_token_priority": 1e-05,
+    "input_cost_per_token_priority": 5e-06,
     "litellm_provider": "openai",
     "long_context_input_cost_multiplier": 2.0,
     "long_context_input_token_threshold": 272000,
@@ -5505,7 +5524,7 @@
     "output_cost_per_token_above_272k_tokens_flex": 2.25e-05,
     "output_cost_per_token_batches": 1.5e-05,
     "output_cost_per_token_flex": 1.5e-05,
-    "output_cost_per_token_priority": 6e-05,
+    "output_cost_per_token_priority": 3e-05,
     "regional_processing_uplift_multiplier_eu": 1.1,
     "regional_processing_uplift_multiplier_us": 1.1,
     "supported_endpoints": [
