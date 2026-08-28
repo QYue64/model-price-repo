@@ -29,7 +29,7 @@
   },
   "claude-3-haiku-20240307": {
     "cache_creation_input_token_cost": 3e-07,
-    "cache_creation_input_token_cost_above_1hr": 6e-06,
+    "cache_creation_input_token_cost_above_1hr": 5e-07,
     "cache_read_input_token_cost": 3e-08,
     "deprecation_date": "2026-04-20",
     "input_cost_per_token": 2.5e-07,
@@ -48,7 +48,7 @@
   },
   "claude-3-opus-20240229": {
     "cache_creation_input_token_cost": 1.875e-05,
-    "cache_creation_input_token_cost_above_1hr": 6e-06,
+    "cache_creation_input_token_cost_above_1hr": 3e-05,
     "cache_read_input_token_cost": 1.5e-06,
     "deprecation_date": "2026-01-05",
     "input_cost_per_token": 1.5e-05,
@@ -270,6 +270,9 @@
     "mode": "chat",
     "output_cost_per_token": 5e-05,
     "prompt_cache_min_tokens": 512,
+    "provider_specific_entry": {
+      "us": 1.1
+    },
     "search_context_cost_per_query": {
       "search_context_size_high": 0.01,
       "search_context_size_low": 0.01,
@@ -453,7 +456,6 @@
     "output_cost_per_token": 2.5e-05,
     "prompt_cache_min_tokens": 4096,
     "provider_specific_entry": {
-      "fast": 6.0,
       "us": 1.1
     },
     "search_context_cost_per_query": {
@@ -491,7 +493,6 @@
     "output_cost_per_token": 2.5e-05,
     "prompt_cache_min_tokens": 4096,
     "provider_specific_entry": {
-      "fast": 6.0,
       "us": 1.1
     },
     "search_context_cost_per_query": {
@@ -529,7 +530,6 @@
     "output_cost_per_token": 2.5e-05,
     "prompt_cache_min_tokens": 4096,
     "provider_specific_entry": {
-      "fast": 6.0,
       "us": 1.1
     },
     "search_context_cost_per_query": {
@@ -567,7 +567,6 @@
     "output_cost_per_token": 2.5e-05,
     "prompt_cache_min_tokens": 2048,
     "provider_specific_entry": {
-      "fast": 6.0,
       "us": 1.1
     },
     "search_context_cost_per_query": {
@@ -606,7 +605,6 @@
     "output_cost_per_token": 2.5e-05,
     "prompt_cache_min_tokens": 2048,
     "provider_specific_entry": {
-      "fast": 6.0,
       "us": 1.1
     },
     "search_context_cost_per_query": {
@@ -645,7 +643,6 @@
     "output_cost_per_token": 2.5e-05,
     "prompt_cache_min_tokens": 2048,
     "provider_specific_entry": {
-      "fast": 6.0,
       "us": 1.1
     },
     "search_context_cost_per_query": {
@@ -855,6 +852,9 @@
     "mode": "chat",
     "output_cost_per_token": 1.5e-05,
     "prompt_cache_min_tokens": 1024,
+    "provider_specific_entry": {
+      "us": 1.1
+    },
     "search_context_cost_per_query": {
       "search_context_size_high": 0.01,
       "search_context_size_low": 0.01,
@@ -1051,6 +1051,32 @@
     "supports_system_messages": true,
     "supports_tool_choice": true,
     "supports_vision": false
+  },
+  "deepseek-v4-flash-vision-exp": {
+    "cache_creation_input_token_cost": 0.0,
+    "cache_read_input_token_cost": 1.4e-08,
+    "input_cost_per_token": 4.4e-07,
+    "input_cost_per_token_cache_hit": 1.4e-08,
+    "litellm_provider": "deepseek",
+    "max_input_tokens": 1000000,
+    "max_output_tokens": 393216,
+    "max_tokens": 393216,
+    "mode": "chat",
+    "output_cost_per_token": 1.32e-06,
+    "source": "https://api-docs.deepseek.com/quick_start/pricing",
+    "supported_endpoints": [
+      "/v1/chat/completions"
+    ],
+    "supports_assistant_prefill": true,
+    "supports_function_calling": true,
+    "supports_native_streaming": true,
+    "supports_parallel_function_calling": true,
+    "supports_prompt_caching": true,
+    "supports_reasoning": true,
+    "supports_response_schema": true,
+    "supports_system_messages": true,
+    "supports_tool_choice": true,
+    "supports_vision": true
   },
   "deepseek-v4-pro": {
     "cache_creation_input_token_cost": 0.0,
@@ -1271,6 +1297,7 @@
   "gemini-2.5-flash": {
     "cache_read_input_token_cost": 3e-08,
     "deprecation_date": "2026-10-20",
+    "google_maps_grounding_cost_per_query": 0.025,
     "input_cost_per_audio_token": 1e-06,
     "input_cost_per_token": 3e-07,
     "litellm_provider": "vertex_ai-language-models",
@@ -1362,6 +1389,7 @@
   "gemini-2.5-flash-lite": {
     "cache_read_input_token_cost": 1e-08,
     "deprecation_date": "2026-10-20",
+    "google_maps_grounding_cost_per_query": 0.025,
     "input_cost_per_audio_token": 3e-07,
     "input_cost_per_token": 1e-07,
     "litellm_provider": "vertex_ai-language-models",
@@ -1406,8 +1434,9 @@
     "supports_web_search": true
   },
   "gemini-2.5-flash-lite-preview-06-17": {
-    "cache_read_input_token_cost": 2.5e-08,
+    "cache_read_input_token_cost": 1e-08,
     "deprecation_date": "2025-11-18",
+    "google_maps_grounding_cost_per_query": 0.025,
     "input_cost_per_audio_token": 5e-07,
     "input_cost_per_token": 1e-07,
     "litellm_provider": "vertex_ai-language-models",
@@ -1422,7 +1451,7 @@
       "search_context_size_low": 0.035,
       "search_context_size_medium": 0.035
     },
-    "source": "https://ai.google.dev/gemini-api/docs/models#gemini-2.5-flash-preview",
+    "source": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
     "supported_endpoints": [
       "/v1/chat/completions",
       "/v1/completions",
@@ -1453,6 +1482,7 @@
   },
   "gemini-2.5-flash-lite-preview-09-2025": {
     "cache_read_input_token_cost": 1e-08,
+    "google_maps_grounding_cost_per_query": 0.025,
     "input_cost_per_audio_token": 3e-07,
     "input_cost_per_token": 1e-07,
     "litellm_provider": "vertex_ai-language-models",
@@ -1498,15 +1528,16 @@
   },
   "gemini-2.5-flash-native-audio-latest": {
     "gemini_native_audio": true,
-    "input_cost_per_audio_token": 1e-06,
-    "input_cost_per_token": 3e-07,
+    "input_cost_per_audio_token": 3e-06,
+    "input_cost_per_token": 5e-07,
     "litellm_provider": "gemini",
     "max_input_tokens": 1048576,
     "max_output_tokens": 8192,
     "max_tokens": 8192,
     "mode": "chat",
-    "output_cost_per_token": 2.5e-06,
-    "source": "https://ai.google.dev/pricing",
+    "output_cost_per_audio_token": 1.2e-05,
+    "output_cost_per_token": 2e-06,
+    "source": "https://ai.google.dev/gemini-api/docs/pricing",
     "supported_endpoints": [
       "/v1/realtime"
     ],
@@ -1523,15 +1554,16 @@
   },
   "gemini-2.5-flash-native-audio-preview-09-2025": {
     "gemini_native_audio": true,
-    "input_cost_per_audio_token": 1e-06,
-    "input_cost_per_token": 3e-07,
+    "input_cost_per_audio_token": 3e-06,
+    "input_cost_per_token": 5e-07,
     "litellm_provider": "gemini",
     "max_input_tokens": 1048576,
     "max_output_tokens": 8192,
     "max_tokens": 8192,
     "mode": "chat",
-    "output_cost_per_token": 2.5e-06,
-    "source": "https://ai.google.dev/pricing",
+    "output_cost_per_audio_token": 1.2e-05,
+    "output_cost_per_token": 2e-06,
+    "source": "https://ai.google.dev/gemini-api/docs/pricing",
     "supported_endpoints": [
       "/v1/realtime"
     ],
@@ -1548,15 +1580,16 @@
   },
   "gemini-2.5-flash-native-audio-preview-12-2025": {
     "gemini_native_audio": true,
-    "input_cost_per_audio_token": 1e-06,
-    "input_cost_per_token": 3e-07,
+    "input_cost_per_audio_token": 3e-06,
+    "input_cost_per_token": 5e-07,
     "litellm_provider": "gemini",
     "max_input_tokens": 1048576,
     "max_output_tokens": 8192,
     "max_tokens": 8192,
     "mode": "chat",
-    "output_cost_per_token": 2.5e-06,
-    "source": "https://ai.google.dev/pricing",
+    "output_cost_per_audio_token": 1.2e-05,
+    "output_cost_per_token": 2e-06,
+    "source": "https://ai.google.dev/gemini-api/docs/pricing",
     "supported_endpoints": [
       "/v1/realtime"
     ],
@@ -1572,7 +1605,8 @@
     "supports_audio_output": true
   },
   "gemini-2.5-flash-preview-09-2025": {
-    "cache_read_input_token_cost": 7.5e-08,
+    "cache_read_input_token_cost": 3e-08,
+    "google_maps_grounding_cost_per_query": 0.025,
     "input_cost_per_audio_token": 1e-06,
     "input_cost_per_token": 3e-07,
     "litellm_provider": "vertex_ai-language-models",
@@ -1587,7 +1621,7 @@
       "search_context_size_low": 0.035,
       "search_context_size_medium": 0.035
     },
-    "source": "https://developers.googleblog.com/en/continuing-to-bring-you-our-latest-models-with-an-improved-gemini-2-5-flash-and-flash-lite-release/",
+    "source": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
     "supported_endpoints": [
       "/v1/chat/completions",
       "/v1/completions",
@@ -1617,11 +1651,11 @@
     "supports_web_search": true
   },
   "gemini-2.5-flash-preview-tts": {
-    "input_cost_per_token": 3e-07,
+    "input_cost_per_token": 5e-07,
     "litellm_provider": "gemini",
     "mode": "audio_speech",
-    "output_cost_per_token": 2.5e-06,
-    "source": "https://ai.google.dev/pricing",
+    "output_cost_per_token": 1e-05,
+    "source": "https://ai.google.dev/gemini-api/docs/pricing",
     "supported_endpoints": [
       "/v1/audio/speech"
     ]
@@ -1631,6 +1665,7 @@
     "cache_read_input_token_cost": 1.25e-07,
     "cache_read_input_token_cost_above_200k_tokens": 2.5e-07,
     "deprecation_date": "2026-10-20",
+    "google_maps_grounding_cost_per_query": 0.025,
     "input_cost_per_token": 1.25e-06,
     "input_cost_per_token_above_200k_tokens": 2.5e-06,
     "litellm_provider": "vertex_ai-language-models",
@@ -1673,23 +1708,20 @@
   },
   "gemini-2.5-pro-preview-tts": {
     "cache_read_input_token_cost": 1.25e-07,
-    "cache_read_input_token_cost_above_200k_tokens": 2.5e-07,
     "input_cost_per_audio_token": 7e-07,
-    "input_cost_per_token": 1.25e-06,
-    "input_cost_per_token_above_200k_tokens": 2.5e-06,
+    "input_cost_per_token": 1e-06,
     "litellm_provider": "vertex_ai-language-models",
     "max_input_tokens": 1048576,
     "max_output_tokens": 65535,
     "max_tokens": 65535,
     "mode": "chat",
-    "output_cost_per_token": 1e-05,
-    "output_cost_per_token_above_200k_tokens": 1.5e-05,
+    "output_cost_per_token": 2e-05,
     "search_context_cost_per_query": {
       "search_context_size_high": 0.035,
       "search_context_size_low": 0.035,
       "search_context_size_medium": 0.035
     },
-    "source": "https://ai.google.dev/gemini-api/docs/pricing#gemini-2.5-pro-preview",
+    "source": "https://ai.google.dev/gemini-api/docs/pricing",
     "supported_modalities": [
       "text"
     ],
@@ -1709,6 +1741,7 @@
   "gemini-3-flash": {
     "cache_read_input_token_cost": 5e-08,
     "cache_read_input_token_cost_priority": 9e-08,
+    "google_maps_grounding_cost_per_query": 0.014,
     "input_cost_per_audio_token": 1e-06,
     "input_cost_per_audio_token_priority": 1.8e-06,
     "input_cost_per_token": 5e-07,
@@ -1759,6 +1792,7 @@
   "gemini-3-flash-preview": {
     "cache_read_input_token_cost": 5e-08,
     "cache_read_input_token_cost_priority": 9e-08,
+    "google_maps_grounding_cost_per_query": 0.014,
     "input_cost_per_audio_token": 1e-06,
     "input_cost_per_audio_token_priority": 1.8e-06,
     "input_cost_per_token": 5e-07,
@@ -2024,6 +2058,7 @@
     "cache_read_input_token_cost_flex": 1.25e-08,
     "cache_read_input_token_cost_priority": 4.5e-08,
     "deprecation_date": "2027-05-07",
+    "google_maps_grounding_cost_per_query": 0.014,
     "input_cost_per_audio_token": 5e-07,
     "input_cost_per_token": 2.5e-07,
     "input_cost_per_token_batches": 1.25e-07,
@@ -2116,6 +2151,7 @@
   },
   "gemini-3.1-flash-lite-preview": {
     "cache_read_input_token_cost": 2.5e-08,
+    "google_maps_grounding_cost_per_query": 0.014,
     "input_cost_per_audio_token": 5e-07,
     "input_cost_per_token": 2.5e-07,
     "litellm_provider": "vertex_ai-language-models",
@@ -2201,6 +2237,7 @@
     "cache_read_input_token_cost_above_200k_tokens": 4e-07,
     "cache_read_input_token_cost_above_200k_tokens_priority": 7.2e-07,
     "cache_read_input_token_cost_priority": 3.6e-07,
+    "google_maps_grounding_cost_per_query": 0.014,
     "input_cost_per_token": 2e-06,
     "input_cost_per_token_above_200k_tokens": 4e-06,
     "input_cost_per_token_above_200k_tokens_priority": 7.2e-06,
@@ -2259,6 +2296,7 @@
     "cache_read_input_token_cost_above_200k_tokens": 4e-07,
     "cache_read_input_token_cost_above_200k_tokens_priority": 7.2e-07,
     "cache_read_input_token_cost_priority": 3.6e-07,
+    "google_maps_grounding_cost_per_query": 0.014,
     "input_cost_per_token": 2e-06,
     "input_cost_per_token_above_200k_tokens": 4e-06,
     "input_cost_per_token_above_200k_tokens_priority": 7.2e-06,
@@ -2317,6 +2355,7 @@
     "cache_read_input_token_cost_above_200k_tokens": 4e-07,
     "cache_read_input_token_cost_above_200k_tokens_priority": 7.2e-07,
     "cache_read_input_token_cost_priority": 3.6e-07,
+    "google_maps_grounding_cost_per_query": 0.014,
     "input_cost_per_token": 2e-06,
     "input_cost_per_token_above_200k_tokens": 4e-06,
     "input_cost_per_token_above_200k_tokens_priority": 7.2e-06,
@@ -2373,6 +2412,7 @@
     "cache_creation_input_token_cost_above_200k_tokens": 2.5e-07,
     "cache_read_input_token_cost": 2e-07,
     "cache_read_input_token_cost_above_200k_tokens": 4e-07,
+    "google_maps_grounding_cost_per_query": 0.014,
     "input_cost_per_token": 2e-06,
     "input_cost_per_token_above_200k_tokens": 4e-06,
     "input_cost_per_token_batches": 1e-06,
@@ -2426,6 +2466,7 @@
     "cache_read_input_token_cost_flex": 7.5e-08,
     "cache_read_input_token_cost_priority": 2.7e-07,
     "deprecation_date": "2027-05-19",
+    "google_maps_grounding_cost_per_query": 0.014,
     "input_cost_per_audio_token": 1.5e-06,
     "input_cost_per_audio_token_priority": 2.7e-06,
     "input_cost_per_token": 1.5e-06,
@@ -2482,9 +2523,10 @@
   },
   "gemini-3.5-flash-lite": {
     "cache_read_input_token_cost": 3e-08,
-    "cache_read_input_token_cost_flex": 2e-08,
+    "cache_read_input_token_cost_flex": 1.5e-08,
     "cache_read_input_token_cost_priority": 5e-08,
     "deprecation_date": "2027-07-21",
+    "google_maps_grounding_cost_per_query": 0.014,
     "input_cost_per_token": 3e-07,
     "input_cost_per_token_batches": 1.5e-07,
     "input_cost_per_token_flex": 1.5e-07,
@@ -2540,6 +2582,7 @@
     "cache_read_input_token_cost": 7.5e-08,
     "cache_read_input_token_cost_flex": 3.75e-08,
     "cache_read_input_token_cost_priority": 1.35e-07,
+    "google_maps_grounding_cost_per_query": 0.014,
     "input_cost_per_token": 7.5e-07,
     "input_cost_per_token_batches": 3.75e-07,
     "input_cost_per_token_flex": 3.75e-07,
@@ -2596,6 +2639,7 @@
     "cache_read_input_token_cost": 7.5e-08,
     "cache_read_input_token_cost_flex": 3.75e-08,
     "cache_read_input_token_cost_priority": 1.35e-07,
+    "google_maps_grounding_cost_per_query": 0.014,
     "input_cost_per_token": 7.5e-07,
     "input_cost_per_token_batches": 3.75e-07,
     "input_cost_per_token_flex": 3.75e-07,
@@ -2749,6 +2793,7 @@
   },
   "gemini-flash-latest": {
     "cache_read_input_token_cost": 3e-08,
+    "google_maps_grounding_cost_per_query": 0.025,
     "input_cost_per_audio_token": 1e-06,
     "input_cost_per_token": 3e-07,
     "litellm_provider": "gemini",
@@ -2795,6 +2840,7 @@
   },
   "gemini-flash-lite-latest": {
     "cache_read_input_token_cost": 1e-08,
+    "google_maps_grounding_cost_per_query": 0.025,
     "input_cost_per_audio_token": 3e-07,
     "input_cost_per_token": 1e-07,
     "litellm_provider": "gemini",
@@ -2839,11 +2885,54 @@
     "supports_web_search": true,
     "tpm": 250000
   },
+  "gemini-live-2.5-flash-native-audio": {
+    "gemini_native_audio": true,
+    "input_cost_per_audio_token": 3e-06,
+    "input_cost_per_token": 5e-07,
+    "litellm_provider": "vertex_ai-language-models",
+    "max_input_tokens": 1048576,
+    "max_output_tokens": 65535,
+    "max_tokens": 65535,
+    "mode": "realtime",
+    "output_cost_per_audio_token": 1.2e-05,
+    "output_cost_per_token": 2e-06,
+    "search_context_cost_per_query": {
+      "search_context_size_high": 0.035,
+      "search_context_size_low": 0.035,
+      "search_context_size_medium": 0.035
+    },
+    "source": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+    "supported_endpoints": [
+      "/vertex_ai/live"
+    ],
+    "supported_modalities": [
+      "text",
+      "image",
+      "audio",
+      "video"
+    ],
+    "supported_output_modalities": [
+      "text",
+      "audio"
+    ],
+    "supports_audio_input": true,
+    "supports_audio_output": true,
+    "supports_function_calling": true,
+    "supports_parallel_function_calling": true,
+    "supports_pdf_input": true,
+    "supports_prompt_caching": true,
+    "supports_response_schema": true,
+    "supports_system_messages": true,
+    "supports_tool_choice": true,
+    "supports_url_context": true,
+    "supports_vision": true,
+    "supports_web_search": true
+  },
   "gemini-live-2.5-flash-preview-native-audio-09-2025": {
     "cache_read_input_token_cost": 7.5e-08,
     "gemini_native_audio": true,
     "input_cost_per_audio_token": 3e-06,
-    "input_cost_per_token": 3e-07,
+    "input_cost_per_token": 5e-07,
     "litellm_provider": "vertex_ai-language-models",
     "max_input_tokens": 1048576,
     "max_output_tokens": 65535,
@@ -2917,6 +3006,7 @@
   "gemini-pro-latest": {
     "cache_read_input_token_cost": 1.25e-07,
     "cache_read_input_token_cost_above_200k_tokens": 2.5e-07,
+    "google_maps_grounding_cost_per_query": 0.025,
     "input_cost_per_token": 1.25e-06,
     "input_cost_per_token_above_200k_tokens": 2.5e-06,
     "litellm_provider": "gemini",
