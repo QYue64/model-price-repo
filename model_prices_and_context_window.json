@@ -148,6 +148,7 @@
       "search_context_size_low": 0.01,
       "search_context_size_medium": 0.01
     },
+    "source": "https://docs.anthropic.com/en/docs/about-claude/models/overview",
     "supports_adaptive_thinking": true,
     "supports_assistant_prefill": false,
     "supports_computer_use": true,
@@ -689,6 +690,7 @@
       "search_context_size_low": 0.01,
       "search_context_size_medium": 0.01
     },
+    "source": "https://docs.anthropic.com/en/docs/about-claude/models/overview",
     "supports_adaptive_thinking": true,
     "supports_assistant_prefill": false,
     "supports_computer_use": true,
@@ -897,6 +899,7 @@
       "search_context_size_low": 0.01,
       "search_context_size_medium": 0.01
     },
+    "source": "https://docs.anthropic.com/en/docs/about-claude/models/overview",
     "supports_adaptive_thinking": true,
     "supports_assistant_prefill": false,
     "supports_computer_use": true,
@@ -2903,7 +2906,8 @@
     },
     "source": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
     "supported_endpoints": [
-      "/vertex_ai/live"
+      "/vertex_ai/live",
+      "/v1/realtime"
     ],
     "supported_modalities": [
       "text",
@@ -4645,6 +4649,7 @@
     "cache_read_input_token_cost_batches": 6.25e-08,
     "cache_read_input_token_cost_flex": 6.25e-08,
     "cache_read_input_token_cost_priority": 2.5e-07,
+    "default_reasoning_effort": "none",
     "input_cost_per_token": 1.25e-06,
     "input_cost_per_token_batches": 6.25e-07,
     "input_cost_per_token_flex": 6.25e-07,
@@ -4693,6 +4698,7 @@
   "gpt-5.1-2025-11-13": {
     "cache_read_input_token_cost": 1.25e-07,
     "cache_read_input_token_cost_priority": 2.5e-07,
+    "default_reasoning_effort": "none",
     "input_cost_per_token": 1.25e-06,
     "input_cost_per_token_priority": 2.5e-06,
     "litellm_provider": "openai",
@@ -4737,6 +4743,7 @@
   "gpt-5.1-chat-latest": {
     "cache_read_input_token_cost": 1.25e-07,
     "cache_read_input_token_cost_priority": 2.5e-07,
+    "default_reasoning_effort": "none",
     "deprecation_date": "2026-07-23",
     "input_cost_per_token": 1.25e-06,
     "input_cost_per_token_priority": 2.5e-06,
@@ -4910,6 +4917,7 @@
     "cache_read_input_token_cost_batches": 8.75e-08,
     "cache_read_input_token_cost_flex": 8.75e-08,
     "cache_read_input_token_cost_priority": 3.5e-07,
+    "default_reasoning_effort": "none",
     "input_cost_per_token": 1.75e-06,
     "input_cost_per_token_batches": 8.75e-07,
     "input_cost_per_token_flex": 8.75e-07,
@@ -4959,6 +4967,7 @@
   "gpt-5.2-2025-12-11": {
     "cache_read_input_token_cost": 1.75e-07,
     "cache_read_input_token_cost_priority": 3.5e-07,
+    "default_reasoning_effort": "none",
     "input_cost_per_token": 1.75e-06,
     "input_cost_per_token_priority": 3.5e-06,
     "litellm_provider": "openai",
@@ -5301,6 +5310,7 @@
     "cache_read_input_token_cost_batches": 1.3e-07,
     "cache_read_input_token_cost_flex": 1.3e-07,
     "cache_read_input_token_cost_priority": 5e-07,
+    "default_reasoning_effort": "none",
     "input_cost_per_token": 2.5e-06,
     "input_cost_per_token_batches": 1.25e-06,
     "input_cost_per_token_flex": 1.25e-06,
@@ -5350,6 +5360,7 @@
     "cache_read_input_token_cost_above_272k_tokens": 5e-07,
     "cache_read_input_token_cost_flex": 1.3e-07,
     "cache_read_input_token_cost_priority": 5e-07,
+    "default_reasoning_effort": "none",
     "input_cost_per_token": 2.5e-06,
     "input_cost_per_token_above_272k_tokens": 5e-06,
     "input_cost_per_token_batches": 1.25e-06,
@@ -5402,6 +5413,7 @@
     "cache_read_input_token_cost_batches": 3.75e-08,
     "cache_read_input_token_cost_flex": 3.75e-08,
     "cache_read_input_token_cost_priority": 1.5e-07,
+    "default_reasoning_effort": "none",
     "input_cost_per_token": 7.5e-07,
     "input_cost_per_token_batches": 3.75e-07,
     "input_cost_per_token_flex": 3.75e-07,
@@ -5453,6 +5465,7 @@
     "cache_read_input_token_cost": 7.5e-08,
     "cache_read_input_token_cost_flex": 3.75e-08,
     "cache_read_input_token_cost_priority": 1.5e-07,
+    "default_reasoning_effort": "none",
     "input_cost_per_token": 7.5e-07,
     "input_cost_per_token_batches": 3.75e-07,
     "input_cost_per_token_flex": 3.75e-07,
@@ -5504,6 +5517,7 @@
     "cache_read_input_token_cost": 2e-08,
     "cache_read_input_token_cost_batches": 1e-08,
     "cache_read_input_token_cost_flex": 1e-08,
+    "default_reasoning_effort": "none",
     "input_cost_per_token": 2e-07,
     "input_cost_per_token_batches": 1e-07,
     "input_cost_per_token_flex": 1e-07,
@@ -5552,6 +5566,7 @@
   "gpt-5.4-nano-2026-03-17": {
     "cache_read_input_token_cost": 2e-08,
     "cache_read_input_token_cost_flex": 1e-08,
+    "default_reasoning_effort": "none",
     "input_cost_per_token": 2e-07,
     "input_cost_per_token_batches": 1e-07,
     "input_cost_per_token_flex": 1e-07,
