@@ -3037,9 +3037,9 @@
     "input_cost_per_image_token": 3e-06,
     "input_cost_per_token": 5e-07,
     "litellm_provider": "vertex_ai-language-models",
-    "max_input_tokens": 1048576,
-    "max_output_tokens": 65535,
-    "max_tokens": 65535,
+    "max_input_tokens": 131072,
+    "max_output_tokens": 65536,
+    "max_tokens": 65536,
     "mode": "realtime",
     "output_cost_per_audio_token": 1.2e-05,
     "output_cost_per_token": 2e-06,
@@ -3067,12 +3067,12 @@
     "supports_audio_output": true,
     "supports_function_calling": true,
     "supports_parallel_function_calling": true,
-    "supports_pdf_input": true,
-    "supports_prompt_caching": true,
-    "supports_response_schema": true,
+    "supports_pdf_input": false,
+    "supports_prompt_caching": false,
+    "supports_response_schema": false,
     "supports_system_messages": true,
     "supports_tool_choice": true,
-    "supports_url_context": true,
+    "supports_url_context": false,
     "supports_vision": true,
     "supports_web_search": true
   },
@@ -3862,6 +3862,11 @@
     "output_cost_per_token": 6e-07,
     "output_cost_per_token_batches": 3e-07,
     "output_cost_per_token_priority": 1e-06,
+    "search_context_cost_per_query": {
+      "search_context_size_high": 0.025,
+      "search_context_size_low": 0.025,
+      "search_context_size_medium": 0.025
+    },
     "supports_function_calling": true,
     "supports_parallel_function_calling": true,
     "supports_pdf_input": true,
@@ -3886,9 +3891,9 @@
     "output_cost_per_token_batches": 3e-07,
     "output_cost_per_token_priority": 1e-06,
     "search_context_cost_per_query": {
-      "search_context_size_high": 0.03,
+      "search_context_size_high": 0.025,
       "search_context_size_low": 0.025,
-      "search_context_size_medium": 0.0275
+      "search_context_size_medium": 0.025
     },
     "supports_function_calling": true,
     "supports_parallel_function_calling": true,
@@ -3987,9 +3992,9 @@
     "output_cost_per_token": 6e-07,
     "output_cost_per_token_batches": 3e-07,
     "search_context_cost_per_query": {
-      "search_context_size_high": 0.03,
+      "search_context_size_high": 0.025,
       "search_context_size_low": 0.025,
-      "search_context_size_medium": 0.0275
+      "search_context_size_medium": 0.025
     },
     "supports_function_calling": true,
     "supports_parallel_function_calling": true,
@@ -4014,9 +4019,9 @@
     "output_cost_per_token": 6e-07,
     "output_cost_per_token_batches": 3e-07,
     "search_context_cost_per_query": {
-      "search_context_size_high": 0.03,
+      "search_context_size_high": 0.025,
       "search_context_size_low": 0.025,
-      "search_context_size_medium": 0.0275
+      "search_context_size_medium": 0.025
     },
     "supports_function_calling": true,
     "supports_parallel_function_calling": true,
@@ -4189,9 +4194,9 @@
     "output_cost_per_token": 1e-05,
     "output_cost_per_token_batches": 5e-06,
     "search_context_cost_per_query": {
-      "search_context_size_high": 0.05,
-      "search_context_size_low": 0.03,
-      "search_context_size_medium": 0.035
+      "search_context_size_high": 0.025,
+      "search_context_size_low": 0.025,
+      "search_context_size_medium": 0.025
     },
     "supports_function_calling": true,
     "supports_parallel_function_calling": true,
@@ -4216,9 +4221,9 @@
     "output_cost_per_token": 1e-05,
     "output_cost_per_token_batches": 5e-06,
     "search_context_cost_per_query": {
-      "search_context_size_high": 0.05,
-      "search_context_size_low": 0.03,
-      "search_context_size_medium": 0.035
+      "search_context_size_high": 0.025,
+      "search_context_size_low": 0.025,
+      "search_context_size_medium": 0.025
     },
     "supports_function_calling": true,
     "supports_parallel_function_calling": true,
@@ -6835,6 +6840,66 @@
     "litellm_provider": "openai",
     "mode": "image_generation",
     "output_cost_per_image_token": 3e-05,
+    "supported_endpoints": [
+      "/v1/images/generations",
+      "/v1/images/edits"
+    ],
+    "supports_pdf_input": true,
+    "supports_vision": true
+  },
+  "gpt-image-2.5-flare": {
+    "cache_read_input_token_cost": 1.25e-06,
+    "input_cost_per_image_token": 8e-06,
+    "input_cost_per_token": 5e-06,
+    "litellm_provider": "openai",
+    "mode": "image_generation",
+    "output_cost_per_image_token": 3e-05,
+    "source": "https://developers.openai.com/api/docs/pricing",
+    "supported_endpoints": [
+      "/v1/images/generations",
+      "/v1/images/edits"
+    ],
+    "supports_pdf_input": true,
+    "supports_vision": true
+  },
+  "gpt-image-2.5-flare-2026-09-08": {
+    "cache_read_input_token_cost": 1.25e-06,
+    "input_cost_per_image_token": 8e-06,
+    "input_cost_per_token": 5e-06,
+    "litellm_provider": "openai",
+    "mode": "image_generation",
+    "output_cost_per_image_token": 3e-05,
+    "source": "https://developers.openai.com/api/docs/pricing",
+    "supported_endpoints": [
+      "/v1/images/generations",
+      "/v1/images/edits"
+    ],
+    "supports_pdf_input": true,
+    "supports_vision": true
+  },
+  "gpt-image-2.5-sunburst": {
+    "cache_read_input_token_cost": 1.25e-06,
+    "input_cost_per_image_token": 8e-06,
+    "input_cost_per_token": 5e-06,
+    "litellm_provider": "openai",
+    "mode": "image_generation",
+    "output_cost_per_image_token": 3e-05,
+    "source": "https://developers.openai.com/api/docs/pricing",
+    "supported_endpoints": [
+      "/v1/images/generations",
+      "/v1/images/edits"
+    ],
+    "supports_pdf_input": true,
+    "supports_vision": true
+  },
+  "gpt-image-2.5-sunburst-2026-09-08": {
+    "cache_read_input_token_cost": 1.25e-06,
+    "input_cost_per_image_token": 8e-06,
+    "input_cost_per_token": 5e-06,
+    "litellm_provider": "openai",
+    "mode": "image_generation",
+    "output_cost_per_image_token": 3e-05,
+    "source": "https://developers.openai.com/api/docs/pricing",
     "supported_endpoints": [
       "/v1/images/generations",
       "/v1/images/edits"
