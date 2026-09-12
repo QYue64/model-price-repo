@@ -5562,10 +5562,6 @@
     "supports_vision": true,
     "supports_xhigh_reasoning_effort": true
   },
-  "gpt-5.4-cyber": {
-    "litellm_provider": "openai",
-    "mode": "chat"
-  },
   "gpt-5.4-mini": {
     "cache_read_input_token_cost": 7.5e-08,
     "cache_read_input_token_cost_batches": 3.75e-08,
