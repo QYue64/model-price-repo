@@ -2990,7 +2990,6 @@
     "supports_web_search": true
   },
   "gemini-live-2.5-flash-preview-native-audio-09-2025": {
-    "cache_read_input_token_cost": 7.5e-08,
     "gemini_native_audio": true,
     "input_cost_per_audio_token": 3e-06,
     "input_cost_per_image_token": 3e-06,
@@ -3026,7 +3025,7 @@
     "supports_function_calling": true,
     "supports_parallel_function_calling": true,
     "supports_pdf_input": true,
-    "supports_prompt_caching": true,
+    "supports_prompt_caching": false,
     "supports_response_schema": true,
     "supports_system_messages": true,
     "supports_tool_choice": true,
