@@ -2961,7 +2961,7 @@
       "search_context_size_low": 0.035,
       "search_context_size_medium": 0.035
     },
-    "source": "https://cloud.google.com/vertex-ai/generative-ai/pricing",
+    "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
     "supported_endpoints": [
       "/vertex_ai/live",
       "/v1/realtime"
