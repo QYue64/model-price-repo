@@ -1253,7 +1253,7 @@
   },
   "gemini-2.5-flash-image": {
     "cache_read_input_token_cost": 3e-08,
-    "deprecation_date": "2026-10-02",
+    "deprecation_date": "2027-03-15",
     "input_cost_per_audio_token": 1e-06,
     "input_cost_per_token": 3e-07,
     "input_cost_per_token_batches": 1.5e-07,
