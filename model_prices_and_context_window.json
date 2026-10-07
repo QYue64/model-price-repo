@@ -670,7 +670,8 @@
     "output_cost_per_token_batches": 1e-05,
     "prompt_cache_min_tokens": 512,
     "provider_specific_entry": {
-      "fast": 2.0
+      "fast": 2,
+      "us": 1.1
     },
     "search_context_cost_per_query": {
       "search_context_size_high": 0.01,
