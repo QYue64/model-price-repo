@@ -42,6 +42,7 @@
     "supports_sampling_params": false,
     "supports_tool_choice": true,
     "supports_vision": true,
+    "supports_web_search": true,
     "supports_xhigh_reasoning_effort": true,
     "thinking_always_on": true,
     "tool_use_system_prompt_tokens": 346
@@ -88,6 +89,7 @@
     "supports_sampling_params": false,
     "supports_tool_choice": true,
     "supports_vision": true,
+    "supports_web_search": true,
     "supports_xhigh_reasoning_effort": true,
     "thinking_always_on": true
   },
@@ -144,7 +146,8 @@
     "supports_reasoning": true,
     "supports_response_schema": true,
     "supports_tool_choice": true,
-    "supports_vision": true
+    "supports_vision": true,
+    "supports_web_search": true
   },
   "claude-haiku-5-5": {
     "cache_creation_input_token_cost": 1.25e-07,
@@ -400,7 +403,8 @@
     "supports_response_schema": true,
     "supports_thinking_cache_preservation": true,
     "supports_tool_choice": true,
-    "supports_vision": true
+    "supports_vision": true,
+    "supports_web_search": true
   },
   "claude-opus-4-6": {
     "cache_creation_input_token_cost": 6.25e-06,
@@ -443,7 +447,8 @@
     "supports_speed": true,
     "supports_thinking_cache_preservation": true,
     "supports_tool_choice": true,
-    "supports_vision": true
+    "supports_vision": true,
+    "supports_web_search": true
   },
   "claude-opus-4-6-20260205": {
     "cache_creation_input_token_cost": 6.25e-06,
@@ -528,7 +533,8 @@
     "supports_speed": true,
     "supports_thinking_cache_preservation": true,
     "supports_tool_choice": true,
-    "supports_vision": true
+    "supports_vision": true,
+    "supports_web_search": true
   },
   "claude-opus-4-7": {
     "cache_creation_input_token_cost": 6.25e-06,
@@ -572,6 +578,7 @@
     "supports_thinking_cache_preservation": true,
     "supports_tool_choice": true,
     "supports_vision": true,
+    "supports_web_search": true,
     "supports_xhigh_reasoning_effort": true
   },
   "claude-opus-4-7-20260416": {
@@ -659,6 +666,7 @@
     "supports_thinking_cache_preservation": true,
     "supports_tool_choice": true,
     "supports_vision": true,
+    "supports_web_search": true,
     "supports_xhigh_reasoning_effort": true
   },
   "claude-opus-5": {
@@ -706,6 +714,7 @@
     "supports_thinking_cache_preservation": true,
     "supports_tool_choice": true,
     "supports_vision": true,
+    "supports_web_search": true,
     "supports_xhigh_reasoning_effort": true
   },
   "claude-opus-5-5": {
@@ -753,6 +762,7 @@
     "supports_speed": true,
     "supports_tool_choice": true,
     "supports_vision": true,
+    "supports_web_search": true,
     "supports_xhigh_reasoning_effort": true,
     "thinking_always_on": true
   },
@@ -914,7 +924,8 @@
     "supports_response_schema": true,
     "supports_thinking_cache_preservation": true,
     "supports_tool_choice": true,
-    "supports_vision": true
+    "supports_vision": true,
+    "supports_web_search": true
   },
   "claude-sonnet-5": {
     "_comment": "Promotional pricing through 2026-08-31: $2 / $2.50 / $4 / $0.20 / $10 per MTok (input / cache-write-5m / cache-write-1h / cache-read / output). Remove this override when the promo ends.",
@@ -959,6 +970,7 @@
     "supports_thinking_cache_preservation": true,
     "supports_tool_choice": true,
     "supports_vision": true,
+    "supports_web_search": true,
     "supports_xhigh_reasoning_effort": true
   },
   "claude-sonnet-5-5": {
@@ -1652,6 +1664,7 @@
     "supports_audio_output": true
   },
   "gemini-2.5-flash-native-audio-preview-12-2025": {
+    "deprecation_date": "2026-11-17",
     "gemini_native_audio": true,
     "input_cost_per_audio_token": 3e-06,
     "input_cost_per_token": 5e-07,
@@ -1728,6 +1741,7 @@
     "supports_web_search": true
   },
   "gemini-2.5-flash-preview-tts": {
+    "deprecation_date": "2026-11-17",
     "input_cost_per_token": 5e-07,
     "input_cost_per_token_batches": 2.5e-07,
     "litellm_provider": "gemini",
@@ -2308,6 +2322,7 @@
     "web_search_billing_unit": "per_query"
   },
   "gemini-3.1-flash-live-preview": {
+    "deprecation_date": "2026-11-17",
     "gemini_audio_only_live": true,
     "input_cost_per_audio_token": 3e-06,
     "input_cost_per_image_token": 1e-06,
