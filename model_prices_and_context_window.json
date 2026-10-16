@@ -893,7 +893,7 @@
     "source": "https://platform.claude.com/docs/en/about-claude/pricing",
     "supports_adaptive_thinking": true,
     "supports_anthropic_compaction": true,
-    "supports_assistant_prefill": true,
+    "supports_assistant_prefill": false,
     "supports_computer_use": true,
     "supports_function_calling": true,
     "supports_legacy_thinking": true,
