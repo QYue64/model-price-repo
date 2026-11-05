@@ -7271,6 +7271,13 @@
     "supports_web_search": true,
     "supports_xhigh_reasoning_effort": true
   },
+  "gpt-6-cyber": {
+    "cache_read_input_token_cost": 2e-06,
+    "input_cost_per_token": 2e-05,
+    "litellm_provider": "openai",
+    "mode": "chat",
+    "output_cost_per_token": 0.0001
+  },
   "gpt-6-luna": {
     "cache_creation_input_token_cost_above_12hr": 2.5e-07,
     "cache_creation_input_token_cost_above_12hr_above_272k_tokens": 5e-07,
