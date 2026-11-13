@@ -4462,6 +4462,7 @@
     "mode": "chat",
     "output_cost_per_audio_token": 2e-05,
     "output_cost_per_token": 6e-07,
+    "successor_model": "gpt-audio-1.5",
     "supports_audio_input": true,
     "supports_audio_output": true,
     "supports_function_calling": true,
@@ -4482,6 +4483,7 @@
     "mode": "realtime",
     "output_cost_per_audio_token": 2e-05,
     "output_cost_per_token": 2.4e-06,
+    "successor_model": "gpt-realtime-2.1-mini",
     "supports_audio_input": true,
     "supports_audio_output": true,
     "supports_function_calling": true,
@@ -4785,7 +4787,7 @@
       "search_context_size_medium": 0.01
     },
     "source": "https://developers.openai.com/api/docs/pricing",
-    "successor_model": "gpt-5.6-sol",
+    "successor_model": "gpt-6.1-sol",
     "supported_endpoints": [
       "/v1/chat/completions",
       "/v1/batch",
@@ -4846,7 +4848,7 @@
       "search_context_size_medium": 0.01
     },
     "source": "https://developers.openai.com/api/docs/pricing",
-    "successor_model": "gpt-5.6-sol",
+    "successor_model": "gpt-6.1-sol",
     "supported_endpoints": [
       "/v1/chat/completions",
       "/v1/batch",
@@ -5013,7 +5015,7 @@
       "search_context_size_medium": 0.01
     },
     "source": "https://developers.openai.com/api/docs/pricing",
-    "successor_model": "gpt-5.6-terra",
+    "successor_model": "gpt-6.1-terra",
     "supported_endpoints": [
       "/v1/chat/completions",
       "/v1/batch",
@@ -5074,7 +5076,7 @@
       "search_context_size_medium": 0.01
     },
     "source": "https://developers.openai.com/api/docs/pricing",
-    "successor_model": "gpt-5.6-terra",
+    "successor_model": "gpt-6.1-terra",
     "supported_endpoints": [
       "/v1/chat/completions",
       "/v1/batch",
@@ -5132,7 +5134,7 @@
       "search_context_size_medium": 0.01
     },
     "source": "https://developers.openai.com/api/docs/pricing",
-    "successor_model": "gpt-5.6-luna",
+    "successor_model": "gpt-6-luna",
     "supported_endpoints": [
       "/v1/chat/completions",
       "/v1/batch",
@@ -5190,7 +5192,7 @@
       "search_context_size_medium": 0.01
     },
     "source": "https://developers.openai.com/api/docs/pricing",
-    "successor_model": "gpt-5.6-luna",
+    "successor_model": "gpt-6-luna",
     "supported_endpoints": [
       "/v1/chat/completions",
       "/v1/batch",
@@ -5243,7 +5245,7 @@
       "search_context_size_medium": 0.01
     },
     "source": "https://developers.openai.com/api/docs/pricing",
-    "successor_model": "gpt-5.6-sol",
+    "successor_model": "gpt-6.1-sol",
     "supported_endpoints": [
       "/v1/batch",
       "/v1/responses"
@@ -5295,7 +5297,7 @@
       "search_context_size_medium": 0.01
     },
     "source": "https://developers.openai.com/api/docs/pricing",
-    "successor_model": "gpt-5.6-sol",
+    "successor_model": "gpt-6.1-sol",
     "supported_endpoints": [
       "/v1/batch",
       "/v1/responses"
@@ -9089,6 +9091,7 @@
     "cache_read_input_token_cost_flex": 2.5e-07,
     "cache_read_input_token_cost_priority": 8.75e-07,
     "deprecation_date": "2026-12-11",
+    "deprecation_source": "https://developers.openai.com/api/docs/deprecations",
     "fedramp_uplift_multiplier": 1.1,
     "input_cost_per_token": 2e-06,
     "input_cost_per_token_batches": 1e-06,
@@ -9115,7 +9118,7 @@
       "search_context_size_medium": 0.01
     },
     "source": "https://developers.openai.com/api/docs/pricing",
-    "successor_model": "gpt-5.6-sol",
+    "successor_model": "gpt-6.1-sol",
     "supported_endpoints": [
       "/v1/responses",
       "/v1/chat/completions",
@@ -9171,7 +9174,7 @@
       "search_context_size_medium": 0.01
     },
     "source": "https://developers.openai.com/api/docs/pricing",
-    "successor_model": "gpt-5.6-sol",
+    "successor_model": "gpt-6.1-sol",
     "supported_endpoints": [
       "/v1/responses",
       "/v1/chat/completions",
@@ -9334,7 +9337,7 @@
       "search_context_size_medium": 0.01
     },
     "source": "https://developers.openai.com/api/docs/pricing",
-    "successor_model": "gpt-5.6-sol",
+    "successor_model": "gpt-6.1-sol",
     "supported_endpoints": [
       "/v1/responses",
       "/v1/batch"
@@ -9381,7 +9384,7 @@
       "search_context_size_medium": 0.01
     },
     "source": "https://developers.openai.com/api/docs/pricing",
-    "successor_model": "gpt-5.6-sol",
+    "successor_model": "gpt-6.1-sol",
     "supported_endpoints": [
       "/v1/responses",
       "/v1/batch"
