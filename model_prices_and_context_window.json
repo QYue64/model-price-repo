@@ -8160,7 +8160,7 @@
     "output_cost_per_image_token": 8e-06,
     "output_cost_per_image_token_batches": 4e-06,
     "source": "https://developers.openai.com/api/docs/pricing",
-    "successor_model": "gpt-image-2.5-sunburst",
+    "successor_model": "gpt-image-2.6-sunburst",
     "supported_endpoints": [
       "/v1/images/generations",
       "/v1/images/edits"
@@ -8184,7 +8184,7 @@
     "output_cost_per_token": 1e-05,
     "output_cost_per_token_batches": 5e-06,
     "source": "https://developers.openai.com/api/docs/pricing",
-    "successor_model": "gpt-image-2.5-sunburst",
+    "successor_model": "gpt-image-2.6-sunburst",
     "supported_endpoints": [
       "/v1/images/generations"
     ],
@@ -8208,7 +8208,7 @@
     "output_cost_per_token": 1e-05,
     "output_cost_per_token_batches": 5e-06,
     "source": "https://developers.openai.com/api/docs/pricing",
-    "successor_model": "gpt-image-2.5-sunburst",
+    "successor_model": "gpt-image-2.6-sunburst",
     "supported_endpoints": [
       "/v1/images/generations"
     ],
