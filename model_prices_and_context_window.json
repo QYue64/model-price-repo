@@ -2922,7 +2922,7 @@
     "cache_read_input_token_cost_batches": 3.75e-08,
     "cache_read_input_token_cost_flex": 3.75e-08,
     "cache_read_input_token_cost_priority": 1.35e-07,
-    "deprecation_date": "2026-11-19",
+    "deprecation_date": "2027-01-28",
     "deprecation_source": "https://cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions",
     "google_maps_grounding_cost_per_query": 0.014,
     "input_cost_per_token": 7.5e-07,
@@ -2950,7 +2950,7 @@
       "shared_group": "gemini-3"
     },
     "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
-    "successor_model": "gemini-3.8-flash",
+    "successor_model": "vertex_ai/gemini-4-hydrogen",
     "supported_endpoints": [
       "/v1/chat/completions",
       "/v1/completions",
@@ -3017,7 +3017,7 @@
       "shared_group": "gemini-3"
     },
     "source": "https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/pricing",
-    "successor_model": "gemini-3.8-flash",
+    "successor_model": "vertex_ai/gemini-4-hydrogen",
     "supported_endpoints": [
       "/v1/chat/completions",
       "/v1/completions",
